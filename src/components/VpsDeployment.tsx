@@ -21,7 +21,8 @@ import {
   RefreshCw,
   Info
 } from 'lucide-react';
-import { FREE_VPS_PROVIDERS, FreeVpsProvider, getSystemDeploymentStatus } from '../services/deployment';
+import { FREE_VPS_PROVIDERS, getSystemDeploymentStatus } from '../types/shared';
+import type { FreeVpsProvider } from '../types/shared';
 
 export const VpsDeployment: React.FC = () => {
   const [selectedProviderId, setSelectedProviderId] = useState<string>('oracle-cloud');

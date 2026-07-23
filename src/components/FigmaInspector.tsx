@@ -18,7 +18,7 @@ import {
   Smartphone,
   Monitor
 } from 'lucide-react';
-import { FigmaFrameSpec, FigmaAnalysisResult } from '../services/figma';
+import type { FigmaFrameSpec, FigmaAnalysisResult } from '../types/shared';
 
 export const FigmaInspector: React.FC = () => {
   const [frames, setFrames] = useState<FigmaFrameSpec[]>([]);

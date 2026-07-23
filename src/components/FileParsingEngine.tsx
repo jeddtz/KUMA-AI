@@ -17,7 +17,7 @@ import {
   Database,
   Bot
 } from 'lucide-react';
-import { ParsedDocument, DocumentQAResponse } from '../services/fileParser';
+import type { ParsedDocument, DocumentQAResponse } from '../types/shared';
 
 export const FileParsingEngine: React.FC = () => {
   const [documents, setDocuments] = useState<ParsedDocument[]>([]);

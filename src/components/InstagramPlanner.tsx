@@ -16,7 +16,7 @@ import {
   Share2,
   Bookmark
 } from 'lucide-react';
-import { InstagramPostPayload, IslamicQuoteTheme } from '../services/instagram';
+import type { InstagramPostPayload, IslamicQuoteTheme } from '../types/shared';
 
 export const InstagramPlanner: React.FC = () => {
   const [queue, setQueue] = useState<InstagramPostPayload[]>([]);
