@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  ai247-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai247-assistant
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+      - META_INSTAGRAM_ACCOUNT_ID=${META_INSTAGRAM_ACCOUNT_ID}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - ai247-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: ai247-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
+    depends_on:
+      - ai247-app
+    networks:
+      - ai247-network
+
+networks:
+  ai247-network:
+    driver: bridge
